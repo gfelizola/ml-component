@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Router Informer</h1>
+            <p class="lead">Complete os campos do formulário com as informações desejadas e clique em "Calcular".</p>
+        </div>
+
+        <div id="routerInformer">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="containerAlertas"></div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Endereços</div>
+                                <table id="tabelaEnderecos" class="table"></table>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="formAdicionarEndereco" class="form-horizontal hidden" role="form">
+                                <div class="form-group">
+                                    <label for="txtNome" class="col-sm-2 control-label">Nome da rua/avenida</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtNome" placeholder="" value="Rua ">
+                                    </div>
+                                
+                                    <label for="txtNumero" class="col-sm-2 control-label">Número</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="txtNumero" placeholder="" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtCidade" class="col-sm-2 control-label">Cidade</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="txtCidade" placeholder="" value="São Paulo">
+                                    </div>
+
+                                    <label for="selEstado" class="col-sm-2 control-label">Estado</label>
+                                    <div class="col-sm-2">
+                                        <select name="selEstado" id="selEstado" class="form-control">
+                                            <option value="0">Selecione</option>
+                                            <option value="ac">AC</option>
+                                            <option value="al">AL</option>
+                                            <option value="am">AM</option>
+                                            <option value="ap">AP</option>
+                                            <option value="ba">BA</option>
+                                            <option value="ce">CE</option>
+                                            <option value="df">DF</option>
+                                            <option value="es">ES</option>
+                                            <option value="go">GO</option>
+                                            <option value="ma">MA</option>
+                                            <option value="mg">MG</option>
+                                            <option value="ms">MS</option>
+                                            <option value="mt">MT</option>
+                                            <option value="pa">PA</option>
+                                            <option value="pb">PB</option>
+                                            <option value="pe">PE</option>
+                                            <option value="pi">PI</option>
+                                            <option value="pr">PR</option>
+                                            <option value="rj">RJ</option>
+                                            <option value="rn">RN</option>
+                                            <option value="ro">RO</option>
+                                            <option value="rr">RR</option>
+                                            <option value="rs">RS</option>
+                                            <option value="sc">SC</option>
+                                            <option value="se">SE</option>
+                                            <option value="sp" selected>SP</option>
+                                            <option value="to">TO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="button" id="btnCancelar" class="btn btn-warning">Cancelar</button>
+                                        <button type="button" id="btnGravar" class="btn btn-primary">Gravar</button>
+                                        <img id="loadingCoords" src="img/ajax-loader.gif" alt="" class="hidden">
+
+                                        <button id="btnRua1" type="button" class="btn btn-success">Rua 1</button>
+                                        <button id="btnRua2" type="button" class="btn btn-success">Rua 2</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="btnAdicionar" type="button" class="btn btn-primary">Adicionar Endereço</button>
+                            <button id="btnLimpar" type="button" class="btn btn-danger">Limpar</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Opções de Busca</h3>
+                            <form id="formOpcoesBusca" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tipo de busca</label>
+                                    <div class="col-sm-10">
+
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="rotaTipo" id="rotaTipo1" value="0" checked> Rota padrão mais rápida
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="rotaTipo" id="rotaTipo2" value="23"> Rota evitando o trânsito.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtConsumo" class="col-sm-2 control-label">Consumo médio do veículo</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="txtConsumo" value="8">
+                                    </div>
+                                    <label for="txtPreco" class="col-sm-2 control-label">Preço do combustível</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="txtPreco" value="3">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="btnCalcular" type="button" class="btn btn-success">Calcular</button>
+                            <img id="loadingCoords" src="img/ajax-loader.gif" alt="" class="hidden">
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="resultContainer" class="col-md-4 panel">
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Project scripts -->
+    <script type="text/javascript" src="http://services.maplink.com.br/maplinkapi2/api.ashx?v=4&key=ymYmaxLXdMBJRmLgendrG0RjGYOIbvLXOwBvSJvgNMpPSAFAGKdAOKFgTmzPTKs9"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
