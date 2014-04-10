@@ -219,7 +219,6 @@
     */
     RouterInformer.prototype.buscarInfosRotas = function(funcaoRetorno) {
         var ri = this;
-        
 
         if( this.listaEnderecos.length == 0 ){
             throw new Error("A lista de endereços tem que possuir itens antes de realizar a busca");
